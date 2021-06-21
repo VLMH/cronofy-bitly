@@ -5,13 +5,18 @@ require 'spec_helper'
 describe AddRedirection do
   context 'call' do
     it 'return short slug' do
-      expect(subject.call).not_to be_empty
+      expect(subject.call(url: 'https://google.com')).not_to be_empty
     end
 
     context 'invalid url' do
-      it 'return nil for empty string'
-      it 'return nil for invalid url format'
-      it 'return nil for url without host'
+      [
+        '',
+        'invalid',
+        'http:',
+        'ws://google.com'
+      ].each do |input|
+        it { expect(subject.call(url: input)).to be_nil }
+      end
     end
   end
 end
