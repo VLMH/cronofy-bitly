@@ -45,3 +45,9 @@ $ rackup -p 3000
 $ open http://localhost:3000/r/<slug1> # open browser and redirect to https://cronofy.com
 $ open http://localhost:3000/r/<slug2> # open browser and redirect to https://google.com
 ```
+
+## Improvement
+
+- Add index to Redirection.url to search existing url
+  Consider to generate hash from url (e.g. md5) and store in new column for searching
+- Add cache for faster slug-url searching (e.g. redis, memcached)
