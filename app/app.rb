@@ -11,6 +11,13 @@ class App < Sinatra::Base
   end
 
   get '/r/:slug' do
-    redirect to('https://google.com')
+    slug = params[:slug]
+    redirection = Redirection.find_by(slug: slug)
+
+    if redirection
+      redirect to(redirection.url)
+    else
+      status 404
+    end
   end
 end

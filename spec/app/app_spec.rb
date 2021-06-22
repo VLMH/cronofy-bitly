@@ -11,10 +11,19 @@ describe App do
   end
 
   context "GET /r/:slug" do
-    it "redirect to google.com" do
-      get "/r/abcdef"
+    let(:slug) { 'abcdef' }
+    let(:url) { 'https://cronofy.com' }
+    before { Redirection.create(url: url, slug: slug) }
+
+    it "redirect to original url" do
+      get "/r/#{slug}"
       expect(last_response).to be_redirect
-      expect(last_response.headers.dig('Location')).to eq('https://google.com')
+      expect(last_response.headers.dig('Location')).to eq(url)
+    end
+
+    it "return 404" do
+      get "/r/fake"
+      expect(last_response.status).to eq(404)
     end
   end
 end
