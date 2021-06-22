@@ -12,6 +12,14 @@ describe AddRedirection do
       expect { subject.call(url: 'https://cronofy.com') }.to change(Redirection, :count).by(1)
     end
 
+    context 'existing redirection' do
+      let(:slug) { 'abcdef' }
+      let(:url) { 'http://google.com' }
+      before { Redirection.create(url: url, slug: slug) }
+
+      it { expect(subject.call(url: url)).to eq(slug) }
+    end
+
     context 'invalid url' do
       [
         '',
