@@ -13,4 +13,5 @@ gem 'rake', '~> 13.0', '>= 13.0.3'
 group :test do
   gem 'rspec', '~> 3.10'
   gem 'rack-test', '~> 1.1'
+  gem 'database_cleaner-active_record', '~> 2.0', '>= 2.0.1'
 end
