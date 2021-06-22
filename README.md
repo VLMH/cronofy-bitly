@@ -16,6 +16,7 @@ Make sure you have Ruby and Sqlite3 installed
 
 ```
 $ git clone git@github.com:VLMH/cronofy-bitly.git
+$ cd cronofy-bitly
 $ bundle install
 $ rake db:create db:migrate
 ```
