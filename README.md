@@ -15,7 +15,7 @@ Shorten URL by generate slug (short code) and redirect shorten links to original
 Make sure you have Ruby and Sqlite3 installed
 
 ```
-$ git clone <repo>
+$ git clone git@github.com:VLMH/cronofy-bitly.git
 $ bundle install
 $ rake db:create db:migrate
 ```
