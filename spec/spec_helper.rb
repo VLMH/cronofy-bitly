@@ -1,7 +1,7 @@
 ENV['APP_ENV'] = 'test'
 
 require "rack/test"
-require 'database_cleaner-active_record'
+require 'database_cleaner/active_record'
 
 Dir["#{File.dirname(__FILE__)}/../app/**/*.rb"].each { |f| require f }
 require File.expand_path('../../spec/helpers/test_app', __FILE__)
@@ -26,8 +26,15 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include TestApp
 
-  config.before(:each) do
-    DatabaseCleaner.clean
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 
   # rspec-expectations config goes here. You can use an alternate
