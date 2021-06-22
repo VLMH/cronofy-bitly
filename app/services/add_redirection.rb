@@ -13,7 +13,10 @@ class AddRedirection
     uri = URI.parse(input)
     return unless uri.is_a?(URI::HTTP) && uri.host
 
-    SecureRandom.urlsafe_base64(4)
+    slug = SecureRandom.urlsafe_base64(4)
+    Redirection.create(url: url, slug: slug)
+
+    slug
   rescue URI::InvalidURIError
     nil
   end

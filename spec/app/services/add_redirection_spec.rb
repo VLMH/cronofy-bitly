@@ -8,6 +8,10 @@ describe AddRedirection do
       expect(subject.call(url: 'https://google.com')).not_to be_empty
     end
 
+    it 'create redirection and persist to database' do
+      expect { subject.call(url: 'https://cronofy.com') }.to change(Redirection, :count).by(1)
+    end
+
     context 'invalid url' do
       [
         '',
